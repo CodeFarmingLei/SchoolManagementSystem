@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D67DF17A-4D54-4874-9EF5-9EDE52F23589}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ADO_Demos</RootNamespace>
+    <AssemblyName>ADO_Demos</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>access\ADOTitle.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CSkin">
+      <HintPath>F:\CSkin 16.1.14.3\CSkin 4.0\CSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=5.2.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="common\PageConfig.cs" />
+    <Compile Include="FormAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAbout.Designer.cs">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormClassInfoInsert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormClassInfoInsert.Designer.cs">
+      <DependentUpon>FormClassInfoInsert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCourseInsert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCourseInsert.Designer.cs">
+      <DependentUpon>FormCourseInsert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDelete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDelete.Designer.cs">
+      <DependentUpon>FormDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHelp.Designer.cs">
+      <DependentUpon>FormHelp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMyScore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMyScore.Designer.cs">
+      <DependentUpon>FormMyScore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSCMappingInsert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSCMappingInsert.Designer.cs">
+      <DependentUpon>FormSCMappingInsert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStuInsert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStuInsert.Designer.cs">
+      <DependentUpon>FormStuInsert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNew.Designer.cs">
+      <DependentUpon>FormNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPwdUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPwdUpdate.Designer.cs">
+      <DependentUpon>FormPwdUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStuUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStuUpdate.Designer.cs">
+      <DependentUpon>FormStuUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTeaInsert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTeaInsert.Designer.cs">
+      <DependentUpon>FormTeaInsert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTeaUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTeaUpdate.Designer.cs">
+      <DependentUpon>FormTeaUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+    <Compile Include="studentDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>studentDataSet.xsd</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FormAbout.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormClassInfoInsert.resx">
+      <DependentUpon>FormClassInfoInsert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCourseInsert.resx">
+      <DependentUpon>FormCourseInsert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDelete.resx">
+      <DependentUpon>FormDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHelp.resx">
+      <DependentUpon>FormHelp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMyScore.resx">
+      <DependentUpon>FormMyScore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSCMappingInsert.resx">
+      <DependentUpon>FormSCMappingInsert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStuInsert.resx">
+      <DependentUpon>FormStuInsert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNew.resx">
+      <DependentUpon>FormNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPwdUpdate.resx">
+      <DependentUpon>FormPwdUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStuUpdate.resx">
+      <DependentUpon>FormStuUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTeaInsert.resx">
+      <DependentUpon>FormTeaInsert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTeaUpdate.resx">
+      <DependentUpon>FormTeaUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="studentDataSet.xsc">
+      <DependentUpon>studentDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="studentDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>studentDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="studentDataSet.xss">
+      <DependentUpon>studentDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="access\ADOTitle.ico" />
+    <Content Include="access\DeleteTextFile.txt" />
+    <Content Include="Resources\tsbtn6.png" />
+    <None Include="Resources\tsbtn5.png" />
+    <None Include="Resources\tsbtn4.png" />
+    <None Include="Resources\tsbtn3.png" />
+    <None Include="Resources\tsbtn2.png" />
+    <None Include="Resources\tsbtn1.png" />
+    <None Include="Resources\Student测试用数据库.sql" />
+    <None Include="Resources\ZuoZheimg2.png" />
+    <None Include="Resources\ZuoZheimg1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StudentMSBll\StudentMSBll.csproj">
+      <Project>{2d0491c0-c633-4c6d-8e26-2a629c5b3632}</Project>
+      <Name>StudentMSBll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentMSDal\StudentMSDal.csproj">
+      <Project>{DD2C52B3-B5A2-420A-8A69-A12461383824}</Project>
+      <Name>StudentMSDal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentMSModels\StudentMSModels.csproj">
+      <Project>{8c4ca345-063e-45e7-82dc-bb0d2738a8d5}</Project>
+      <Name>StudentMSModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

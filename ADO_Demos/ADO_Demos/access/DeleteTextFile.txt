@@ -1,0 +1,299 @@
+﻿//Lock控件移出动画
+        public void LockHideShow()
+        {
+            //获取当前屏幕分辨率宽度
+            //int width = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Width;
+            //获取当前屏幕分辩率高度
+            //int height = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Height;
+
+            //生成随机宽度及高度
+            //Random rd = new Random();
+            //int x = rd.Next(10, width - 100);
+            //int y = rd.Next(10, Height - 200);
+
+            //应用随机生成的宽度和高度
+            //this.buttonLock.Location = new System.Drawing.Point(x, y);
+
+            //获取控件宽度
+            int width = ActiveForm.Width;
+            //获取控件高度
+            int height = ActiveForm.Width;
+
+            //Lock控件坐标
+            int index = 50;
+            if (skinbuttonConnSwitch.Text == "开启数据库连接")
+            {
+                for (int i = 1; i <= index; i++)
+                {
+                    this.skinbuttonLock.Location = new Point(this.skinbuttonLock.Location.X, this.skinbuttonLock.Location.Y);
+                }
+            }
+            if (skinbuttonConnSwitch.Text == "关闭数据库连接")
+            {
+                for (int i = index; i >= 0; i--)
+                {
+                    this.skinbuttonLock.Location = new Point(this.skinbuttonLock.Location.X, this.skinbuttonLock.Location.Y);
+                }
+            }
+            
+        }
+
+
+
+		private void 从数据库中删除此条数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //存储选中的行数据
+            int index =  this.skinDataGridViewStudent.CurrentCell.RowIndex + 1;
+            int id = Convert.ToInt32(this.skinDataGridViewStudent.Rows[index - 1].Cells[0].Value);
+            MessageBox.Show("当前选中的行索引值为：" + index + "\n选中行第一列的数据为：" + id + "", "提示");
+
+            //弹窗提示是否删除
+            DialogResult dr = MessageBox.Show("是否删除此条数据？？\n(注意：此操作不可逆！！请慎重使用)", "确认删除", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            if (dr == DialogResult.OK)
+            {
+                string strSql = "DELETE FROM student WHERE sid=" + index;
+                SqlCommand cmd = new SqlCommand(strSql, conn);
+                int flag = cmd.ExecuteNonQuery();
+                if (flag > 0)
+                {
+                    MessageBox.Show("数据删除成功!!", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+            }
+
+        }
+
+
+
+//读取学生表数据填充到dataGridView控件
+        public void StudentRead()
+        {
+            Studentdt.Clear();     //清空临时数据表格(避免多次点击后数据重复添加)
+            SqlConnection conn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter adapter = null;
+            SqlDataReader reader = null;
+            try
+            {
+                conn = new SqlConnection(connStr);
+                conn.Open();
+                string strSql = @" SELECT
+                                            S.sid AS '学生ID',
+	                                        S.sname AS '学生姓名',
+	                                        (
+                                                CASE S.ssex
+                                                WHEN'1' THEN'男'
+                                                WHEN'0' THEN'女'
+                                                ELSE '变性人'
+                                                END
+	                                        ) AS '学生性别',
+	                                        S.sage AS '学生年龄',
+	                                        (
+                                                CAST(YEAR(S.sbirthday) AS CHAR(4)) + '年' +
+                                                CAST(MONTH(S.sbirthday) AS VARCHAR(2)) + '月' +
+                                                CAST(DAY(S.sbirthday) AS VARCHAR(2)) + '日'
+                                            ) AS '学生生日',
+	                                        S.sphone AS '学生电话',
+	                                        S.saddress AS '学生地址',
+	                                        C.cname AS '学生班级',
+	                                        S.spassword AS '学生登录密码'
+                                        FROM student AS S
+                                        LEFT JOIN classInfo AS C ON C.cid = S.scid ";
+                cmd = new SqlCommand(strSql, conn);
+                adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(Studentdt);   //填充数据到临时数据表格
+                skinDataGridViewStudent.DataSource = Studentdt;
+                reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    MessageBox.Show("数据读取完成!!", "执行成功", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else
+                {
+                    MessageBox.Show("数据库内没有数据...", "执行成功", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                reader.Close();
+                adapter.Dispose();
+                cmd.Dispose();
+                conn.Dispose();
+            }
+        }
+
+
+
+//读取教师表数据填充到dataGridView控件
+        public void TeacherRead()
+        {
+            Teacherdt.Clear();     //清空临时数据表格(避免多次点击后数据重复添加)
+            SqlConnection conn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter adapter = null;
+            SqlDataReader reader = null;
+            try
+            {
+                conn = new SqlConnection(connStr);
+                conn.Open();
+                string strSql = " SELECT * FROM teacher ";
+                cmd = new SqlCommand(strSql, conn);
+                adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(Teacherdt);   //填充数据到临时数据表格
+                skinDataGridViewTeacher.DataSource = Teacherdt;
+                reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    MessageBox.Show("数据读取完成!!", "执行成功", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else
+                {
+                    MessageBox.Show("数据库内没有数据...", "执行成功", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                reader.Close();
+                adapter.Dispose();
+                cmd.Dispose();
+                conn.Dispose();
+            }
+        }
+
+
+
+//读取课程表数据填充到dataGridView控件
+        public void CourseRead()
+        {
+            CourseInfodt.Clear();     //清空临时数据表格(避免多次点击后数据重复添加)
+            SqlConnection conn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter adapter = null;
+            SqlDataReader reader = null;
+            try
+            {
+                conn = new SqlConnection(connStr);
+                conn.Open();
+                string strSql = " SELECT * FROM Course ";
+                cmd = new SqlCommand(strSql, conn);
+                adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(CourseInfodt);   //填充数据到临时数据表格
+                this.skinDataGridViewCourse.DataSource = CourseInfodt;
+                reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    MessageBox.Show("数据读取完成!!", "执行成功", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else
+                {
+                    MessageBox.Show("数据库内没有数据...", "执行成功", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                reader.Close();
+                adapter.Dispose();
+                cmd.Dispose();
+                conn.Dispose();
+            }
+        }
+
+
+
+//读取班级表数据填充到dataGridView控件
+        public void classInfoRead()
+        {
+            classInfodt.Clear();     //清空临时数据表格(避免多次点击后数据重复添加)
+            SqlConnection conn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter adapter = null;
+            SqlDataReader reader = null;
+            try
+            {
+                conn = new SqlConnection(connStr);
+                conn.Open();
+                string strSql = " SELECT * FROM classInfo ";
+                cmd = new SqlCommand(strSql, conn);
+                adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(classInfodt);   //填充数据到临时数据表格
+                skinDataGridViewClassInfo.DataSource = classInfodt;
+                reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    MessageBox.Show("数据读取完成!!", "执行成功", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else
+                {
+                    MessageBox.Show("数据库内没有数据...", "执行成功", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                reader.Close();
+                adapter.Dispose();
+                cmd.Dispose();
+                conn.Dispose();
+            }
+        }
+
+
+
+//读取成绩表数据填充到dataGridView控件
+        public void SCMappingRead()
+        {
+            SCMappingdt.Clear();     //清空临时数据表格(避免多次点击后数据重复添加)
+            SqlConnection conn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter adapter = null;
+            SqlDataReader reader = null;
+            try
+            {
+                conn = new SqlConnection(connStr);
+                conn.Open();
+                string strSql = " SELECT * FROM SC_Mapping ";
+                cmd = new SqlCommand(strSql, conn);
+                adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(SCMappingdt);   //填充数据到临时数据表格
+                this.skinDataGridViewSCMapping.DataSource = SCMappingdt;
+                reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    MessageBox.Show("数据读取完成!!", "执行成功", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else
+                {
+                    MessageBox.Show("数据库内没有数据...", "执行成功", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                reader.Close();
+                adapter.Dispose();
+                cmd.Dispose();
+                conn.Dispose();
+            }
+        }
